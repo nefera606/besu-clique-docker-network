@@ -1,0 +1,1 @@
+docker run -p 8545:8545 --mount type=volume,source=./nodes,target=/var/lib/besu hyperledger/besu:latest --config /var/lib/besu/config.toml
