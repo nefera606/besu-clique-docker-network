@@ -78,7 +78,7 @@ services:
       - "8063:8060"
       - "8883:8880"
     volumes:
-      - ./node2:/opt/orion
+      - ./node3:/opt/orion
     command:
       - /opt/orion/orion.conf
     networks:
