@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "5f02160a-25a3-4163-bae1-e26b7c1a64cc",
+		"name": "Ethereum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Besu",
+			"item": [
+				{
+					"name": "Get signers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"clique_getSigners\",\r\n    \"params\": [\r\n        \"latest\"\r\n    ],\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_port}}",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_port}}"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Propose signer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"clique_propose\",\r\n    \"params\": [\r\n        {{node_0_address}},\r\n        true\r\n    ],\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_0_port}}",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_0_port}}"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get proposals",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"clique_proposals\",\r\n    \"params\": [],\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_0_port}}",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_0_port}}"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Net peer count",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"net_peerCount\",\r\n    \"params\": [],\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_0_port}}",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_0_port}}"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Peers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"admin_peers\",\r\n    \"params\": [],\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{node_host}}:{{node_0_port}}",
+							"protocol": "http",
+							"host": [
+								"{{node_host}}"
+							],
+							"port": "{{node_0_port}}"
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Parity",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Geth",
+			"item": [],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
