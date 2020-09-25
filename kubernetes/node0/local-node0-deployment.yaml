@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+  name: node0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: node0
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: node0
+        app: node0
+    spec:
+      containers:
+        - name: envoy-node0
+          image: envoyproxy/envoy:v1.14.1
+          ports:
+            - containerPort: 8545
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/envoy
+              name: envoy-besu-config
+        - name: node0
+          args:
+            - --config-file=/var/lib/besu/config.toml
+            - --network-id=8873625120
+            - --bootnodes
+          image: hyperledger/besu:1.4.5
+          ports:
+            - containerPort: 30000
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/node/private
+              name: node0key
+            - mountPath: /var/lib/besu
+              name: besu-config
+            - mountPath: "/var/lib/node/data"
+              name: node0-ledger
+
+      volumes:
+        - name: node0key
+          secret:
+            secretName: node0key
+        - name: besu-config
+          configMap:
+            name: besu-config
+        - name: envoy-besu-config
+          configMap:
+            name: envoy-besu-config
+        - name: node0-ledger
+          persistentVolumeClaim:
+            claimName: node0-claim
+
+      restartPolicy: Always
+
+status: {}

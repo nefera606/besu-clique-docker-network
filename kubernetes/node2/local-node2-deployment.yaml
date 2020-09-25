@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+  name: node2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: node2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: node2
+        app: node2
+    spec:
+      containers:
+        - name: envoy-node2
+          image: envoyproxy/envoy:v1.14.1
+          ports:
+            - containerPort: 8545
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/envoy
+              name: envoy-besu-config
+
+        - name: node2
+          args:
+            - --config-file=/var/lib/besu/config.toml
+            - --network-id=8873625120
+            - --bootnodes=enode://9683f07e51ed54f30a58332db6cdabc0f2413127961d2ca11bfa637a091a6f738c5f0f977d3cfbc0b603f7cf78b3b05f1c6d58d3f9b7d37d1b3198590e1d5ade@10.101.168.28:30000
+          image: hyperledger/besu:1.4.5
+          ports:
+            - containerPort: 30000
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/node/private
+              name: node2key
+            - mountPath: /var/lib/besu
+              name: besu-config
+            # - mountPath: /var/lib/node/data
+            #   name: node2-ledger
+            - mountPath: /var/lib/node/data/static-nodes.json
+              subPath: static-nodes.json
+              name: static-nodes
+
+      volumes:
+        - name: node2key
+          secret:
+            secretName: node2key
+        - name: besu-config
+          configMap:
+            name: besu-config
+        - name: envoy-besu-config
+          configMap:
+            name: envoy-besu-config
+        # - name: node2-ledger
+        #   persistentVolumeClaim:
+        #     claimName: node2-claim
+        - name: static-nodes
+          configMap:
+            name: static-nodes
+            # items:
+            #   key: static-nodes.json
+            #   path: static-nodes.json
+
+      restartPolicy: Always
+
+status: {}
