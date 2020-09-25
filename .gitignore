@@ -6,3 +6,6 @@
 
 # coverage
 coverage
+
+# windows scripts
+**/*.ps1
