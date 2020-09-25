@@ -1,6 +1,6 @@
 ### Set up volumes ###
 
-**All the commands are prepared for being executed from the root of the project**
+**All the commands are prepared for being executed from the kubernetes folder of the project**
 
 For setting up volumes, first, the location of the volume in local file systems needs to be set
 by editing **local-storage-files-nodex.yaml** in **ledger** folder:
@@ -44,7 +44,7 @@ kubectl create configmap envoy-besu-config --from-file=./envoy/envoy.yaml
 
 Then, add the besu config files:
 ```
-kubectl create configmap besu-config --from-file=./common
+kubectl create configmap besu-config --from-file=../common
 ```
 
 Last, add the key files for the nodes:
