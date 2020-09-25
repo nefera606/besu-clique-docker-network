@@ -1,9 +1,9 @@
 version: '2.1'
 services:
-  #Besu 1
-  node1:
+  #Besu 0
+  node0:
     user: root
-    container_name: besu-node-1
+    container_name: besu-node-0
     volumes: 
       - ./node1:/var/lib/node
       - ./common:/var/lib/besu
@@ -24,9 +24,9 @@ services:
       besu:
         ipv4_address: 172.16.1.30 
     restart: always
-  #Besu 2
-  node2:
-    container_name: besu-node-2
+  #Besu 1
+  node1:
+    container_name: besu-node-1
     volumes: 
       - ./node2:/var/lib/node
       - ./common:/var/lib/besu
@@ -45,9 +45,9 @@ services:
       besu:
         ipv4_address: 172.16.1.31
     restart: always
-  #Besu 3
-  node3:
-    container_name: besu-node-3
+  #Besu 2
+  node2:
+    container_name: besu-node-2
     volumes:
       - ./node3:/var/lib/node
       - ./common:/var/lib/besu
@@ -69,5 +69,8 @@ services:
 # Network
 networks:
   besu:
-    external: 
-      name: orion_besu
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.1.1/24
+          gateway: 172.16.1.1

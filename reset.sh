@@ -1,4 +1,7 @@
-docker-compose down
-sudo rm -rf ./node1/data/database ./node1/data/DATABASE_METADATA.json
-sudo rm -rf ./node2/data/database ./node2/data/DATABASE_METADATA.json
-sudo rm -rf ./node3/data/database ./node3/data/DATABASE_METADATA.json
+# docker-compose down
+rm -rf ./node0/data/
+rm -rf ./node1/data/
+rm -rf ./node2/data/
+rm -rf ./node3/data/
+rm -rf ./node4/data/
+rm -rf ./node5/data/

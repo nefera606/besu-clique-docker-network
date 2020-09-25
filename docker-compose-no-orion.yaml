@@ -1,0 +1,111 @@
+version: '2.1'
+services:
+  #Besu 0
+  node0:
+    user: root
+    container_name: besu-node-0
+    volumes: 
+      - ./node0:/var/lib/node
+      - ./common:/var/lib/besu
+    image: hyperledger/besu:latest
+    command: 
+      --config-file=/var/lib/besu/config.toml
+      --network-id 123
+      --bootnodes
+    ports:
+      - "8544:8547"
+      - "8554:8549"
+    networks:
+      besu:
+        ipv4_address: 172.16.1.30 
+    restart: always
+  #Besu 1
+  node1:
+    container_name: besu-node-1
+    volumes: 
+      - ./node1:/var/lib/node
+      - ./common:/var/lib/besu
+    image: hyperledger/besu:latest
+    command: 
+      --config-file=/var/lib/besu/config.toml
+      --network-id 123
+      --bootnodes="enode://9683f07e51ed54f30a58332db6cdabc0f2413127961d2ca11bfa637a091a6f738c5f0f977d3cfbc0b603f7cf78b3b05f1c6d58d3f9b7d37d1b3198590e1d5ade@172.16.1.30:30000"
+    ports:
+      - "8545:8547"
+    networks:
+      besu:
+        ipv4_address: 172.16.1.31
+    restart: always
+  #Besu 2
+  node2:
+    container_name: besu-node-2
+    volumes:
+      - ./node2:/var/lib/node
+      - ./common:/var/lib/besu
+    image: hyperledger/besu:latest
+    command: 
+      --config-file=/var/lib/besu/config.toml
+      --network-id 123
+      --bootnodes="enode://9683f07e51ed54f30a58332db6cdabc0f2413127961d2ca11bfa637a091a6f738c5f0f977d3cfbc0b603f7cf78b3b05f1c6d58d3f9b7d37d1b3198590e1d5ade@172.16.1.30:30000"
+    ports:
+      - "8546:8547"
+    networks:
+      besu:
+        ipv4_address: 172.16.1.32
+  #Besu 3
+  node3:
+    container_name: besu-node-3
+    volumes:
+      - ./node3:/var/lib/node
+      - ./common:/var/lib/besu
+    image: hyperledger/besu:latest
+    command: 
+      --config-file=/var/lib/besu/config.toml
+      --network-id 123
+      --bootnodes="enode://9683f07e51ed54f30a58332db6cdabc0f2413127961d2ca11bfa637a091a6f738c5f0f977d3cfbc0b603f7cf78b3b05f1c6d58d3f9b7d37d1b3198590e1d5ade@172.16.1.30:30000"
+    ports:
+      - "8547:8547"
+    networks:
+      besu:
+        ipv4_address: 172.16.1.33
+  #Besu 4
+  node4:
+    container_name: besu-node-4
+    volumes:
+      - ./node4:/var/lib/node
+      - ./common:/var/lib/besu
+    image: hyperledger/besu:latest
+    command: 
+      --config-file=/var/lib/besu/config.toml
+      --network-id 123
+      --bootnodes="enode://9683f07e51ed54f30a58332db6cdabc0f2413127961d2ca11bfa637a091a6f738c5f0f977d3cfbc0b603f7cf78b3b05f1c6d58d3f9b7d37d1b3198590e1d5ade@172.16.1.30:30000"
+    ports:
+      - "8548:8547"
+    networks:
+      besu:
+        ipv4_address: 172.16.1.34
+  #Besu 5
+  node5:
+    container_name: besu-node-5
+    volumes:
+      - ./node5:/var/lib/node
+      - ./common:/var/lib/besu
+    image: hyperledger/besu:latest
+    command: 
+      --config-file=/var/lib/besu/config.toml
+      --network-id 123
+      --bootnodes="enode://9683f07e51ed54f30a58332db6cdabc0f2413127961d2ca11bfa637a091a6f738c5f0f977d3cfbc0b603f7cf78b3b05f1c6d58d3f9b7d37d1b3198590e1d5ade@172.16.1.30:30000"
+    ports:
+      - "8549:8547"
+    networks:
+      besu:
+        ipv4_address: 172.16.1.35
+
+# Network
+networks:
+  besu:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.1.1/24
+          gateway: 172.16.1.1
